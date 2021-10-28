@@ -1,0 +1,102 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void reheapDown(int maxHeap[], int numberOfElements, int index)
+{   
+    int largest = index; 
+    int l = 2 * index + 1; 
+    int r = 2 * index + 2; 
+
+    if (l < numberOfElements && maxHeap[l] > maxHeap[largest]) 
+        largest = l; 
+  
+    if (r < numberOfElements && maxHeap[r] > maxHeap[largest]) 
+        largest = r; 
+    
+
+    if (largest != index) { 
+        swap(maxHeap[index], maxHeap[largest]); 
+        reheapDown(maxHeap, numberOfElements, largest); 
+    }
+
+}
+
+void reheapUp(int maxHeap[], int numberOfElements, int index)
+{
+    if (index >0) {
+        int parent = (index -1) / 2;
+        if (maxHeap[index] > maxHeap[parent]) {
+            swap(maxHeap[index], maxHeap[parent]);
+            reheapUp(maxHeap,numberOfElements, parent);
+        }
+    }
+}
+
+void remove(T item) {
+    // TODO: remove the element with value equal to item
+    if(getItem(item) == -1){
+        return;
+    }else{
+        int i = getItem(item);
+        count -= 1;
+        elements[i] = elements[count];
+        reheapUp(i);
+        reheapDown(i);
+    }
+    
+    
+}
+
+
+//heap up heap down
+int main()
+{
+    int n;
+    cin>>n;
+    vector<pair<int,int>>a;
+    int cnt = 1;
+        int mx = 0;
+    while(n--){
+        int x;
+        cin>>x;
+
+        if(x == 1){
+            int k;
+            cin>>k;
+            mx = max(mx, k);
+          //  cout<<a.size()<<endl;
+            a.push_back(make_pair(k,cnt));
+            //cout<<k<<endl;
+         //   cout<<a.size()<<endl;
+            cnt++;
+        }else{
+            if(x == 2){
+                //choose the first one
+                cout<<a[0].second<<" ";
+                a.erase(a.begin());
+                mx = max_first(a);
+            }else if(x == 3){
+               // cout<<a.size()<<endl;
+                int j = 0;
+//                for(j = 0; j<a.size(); j++){
+//                    cout<<a[j].first<<" "<<a[j].second<<endl;
+//                }
+               // cout<<mx<<endl;
+                for(j = 0; j<a.size(); j++){
+                    if(a[j].first == mx){
+                        break;
+                    }
+                }
+          //      cout<<"hello"<<endl;
+               // cout<<j<<endl;
+                cout<<a[j].second<<" ";
+                a.erase(a.begin()+j);
+                mx = max_first(a);
+            }
+        }
+
+    }
+
+    return 0;
+}

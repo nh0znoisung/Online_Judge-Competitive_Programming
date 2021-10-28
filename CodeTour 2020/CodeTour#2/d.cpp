@@ -1,0 +1,108 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int kadane(vector<int> arr, int&start, int&finish, int n)
+{
+    int sum = 0, maxSum = INT_MIN, i;
+    finish = -1;
+    int local_start = 0;
+
+    for (i = 0; i < n; ++i)
+    {
+        if(arr[i]%2 != 0)  sum += arr[i];
+        if (sum < 0)
+        {
+            sum = 0;
+            local_start = i + 1;
+        }
+        else if (sum > maxSum)
+        {
+            maxSum = sum;
+            start = local_start;
+            finish = i;
+        }
+
+    }
+    if (finish != -1)
+        return maxSum;
+    maxSum = arr[0];
+    start = finish = 0;
+    for (i = 1; i < n; i++)
+    {
+        if (arr[i] > maxSum)
+        {
+            maxSum = arr[i];
+            start = finish = i;
+        }
+    }
+    return maxSum;
+}
+
+
+int findMaxSum(vector<vector<int>>M)
+{
+int ROW = M.size();
+int COL = M[0].size();
+int maxSum = INT_MIN,
+                 finalLeft,
+                 finalRight,
+                 finalTop,
+                 finalBottom;
+
+    int left, right, i;
+    int sum, start, finish;
+    for (left = 0; left < COL; ++left) {
+        vector<int>temp(ROW);
+        for (right = left; right < COL; ++right) {
+            for (i = 0; i < ROW; ++i)
+                temp[i] += M[i][right];
+            sum = kadane(temp, start, finish, ROW);
+            if (sum > maxSum) {
+                maxSum = sum;
+                                finalLeft = left;
+                finalRight = right;
+                finalTop = start;
+                finalBottom = finish;
+            }
+        }
+    }
+        // Print final values
+    cout << "(Top, Left) ("
+         << finalTop << ", "
+         << finalLeft
+         << ")" << endl;
+    cout << "(Bottom, Right) ("
+         << finalBottom << ", "
+         << finalRight << ")" << endl;
+    cout << "Max sum is: " << maxSum << endl;
+    return maxSum;
+
+}
+
+
+int main()
+{
+    int t;
+    cin>>t;
+    for(int k = 1; k<= t; k++){
+        int M,N;
+        cin>>M>>N;
+        vector<vector<int>>a(M);
+        for(int i =0; i<M; i++){
+            for(int j =0 ; j<N; j++){
+                int x;
+                cin>>x;
+                a[i].push_back(x);
+            }
+        }
+        cout<<"Test "<<k<<": ";
+        if(findMaxSum(a) > 0) cout<<findMaxSum(a);
+        else cout<<"impossible";
+        cout<<endl;
+    }
+
+
+
+
+    return 0;
+}

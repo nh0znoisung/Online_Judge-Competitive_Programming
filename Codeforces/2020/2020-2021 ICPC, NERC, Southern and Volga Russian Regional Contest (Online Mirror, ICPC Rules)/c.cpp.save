@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+int max_first(vector<pair<int,int>>a){
+    int res = 0;
+    for(int i = 0; i<a.size(); i++){
+        res = max(res, a[i].first);
+    }
+    return res;
+}
+int main()
+{
+    int n;
+    cin>>n;
+    vector<pair<int,int>>a;
+    priority_queue<int> gquiz;
+    int cnt = 1;
+        int mx = 0;
+    while(n--){
+        int x;
+        cin>>x;
+
+        if(x == 1){
+            int k;
+            cin>>k;
+            mx = max(mx, k);
+          //  cout<<a.size()<<endl;
+            a.push_back(make_pair(k,cnt));
+            //cout<<k<<endl;
+         //   cout<<a.size()<<endl;
+            cnt++;
+        }else{
+            if(x == 2){
+                //choose the first one
+                cout<<a[0].second<<" ";
+                a.erase(a.begin());
+                mx = max_first(a);
+            }else if(x == 3){
+               // cout<<a.size()<<endl;
+                int j = 0;
+//                for(j = 0; j<a.size(); j++){
+//                    cout<<a[j].first<<" "<<a[j].second<<endl;
+//                }
+               // cout<<mx<<endl;
+                for(j = 0; j<a.size(); j++){
+                    if(a[j].first == mx){
+                        break;
+                    }
+                }
+          //      cout<<"hello"<<endl;
+               // cout<<j<<endl;
+                cout<<a[j].second<<" ";
+                a.erase(a.begin()+j);
+                mx = max_first(a);
+            }
+        }
+
+    }
+
+    return 0;
+}

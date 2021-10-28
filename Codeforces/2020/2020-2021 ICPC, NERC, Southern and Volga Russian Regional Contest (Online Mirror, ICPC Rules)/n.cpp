@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int n;
+    cin>>n;
+    while(n--){
+        int c1, c2, c3 ,a1, a2, a3, a4, a5;
+        cin>>c1>>c2>>c3>>a1>>a2>>a3>>a4>>a5;
+        if(a1 + a2 + a3 + a4 + a5 > c1+c2+c3) cout<<"NO"<<endl;
+        else{
+            if(a1 > c1 || a2 > c2 || a3 > c3) cout<<"NO"<<endl;
+            else{
+                if(c1 + c3 - a1 - a3 < a4) cout<<"NO"<<endl;
+                else if(c2 + c3 - a2 - a3 < a5) cout<<"NO"<<endl;
+                else{
+                    cout<<"YES"<<endl;
+                }
+            }
+        }
+    }
+
+    return 0;
+}
