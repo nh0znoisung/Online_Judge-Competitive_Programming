@@ -1,0 +1,77 @@
+***** Linux setup + Sublime text 3 (LSP + Clangd plugin)
+Link: https://www.youtube.com/watch?v=1MS2BS0c6uY&list=LL&index=6&t=7331s
+
++) codeforces_gen -c A B C: 
+------> Create A.cc, B.cc with template + (output.txt + input.txt file Maybe API)
+------> Open it On Sublime Text
+
++) runsamples A: Compile C++ + API or get input and output (all maybe 1->4)
+[DEBUG MODE] Compliling F-slow.cc with c++17. 
+Running A-1.in:
+Memory: 111kB
+Time: 0.000s
+--------
+Output:
+1234
+...
+--------
+Expected:
+1234
+....
+-------
+Mismatch at 3-rd value: NO (run_samples_output-A-12345.txt) vs. YES (A-1.out)
+Mismatch at 2-nd value: ...
+Failed! -- red color
+Passed! -- green color
+
+0/4 tests passed. -- red color
+
+
+Running A-2.in:
+... second testcase in Codeforces page
+.............
+
++) Get into some basic algorithm template already setup
+Ctrl + P: Sieve.cc in number_theory/sieve.cc
+Copy the function and some global variables.
+
+
++) Create F-slow for slower version: 
+codeforces_gen F
+runsamples F-slow F (**) -> Run F-slow as F ????
+gdbrun F-slow (GNU gdb Ubuntu 18.04-2) 10.2
+--up
+--up (Run like the Haskell)
+
++) tests_gen
+-- Open tests.sh
+------
+#!/bin/bash
+
+cppcompile && gnome-terminal -- run_tests
+------
+Rewrite:
+gnome-terminal -- run_tests_first_line -s F F-slow "random_gen"
+
++) random_gen --log 1 100 1000 0 1 0
+
++) Rewrite: 
+gnome-terminal -- run_tests_first_line F F-slow "random_gen --log 1 100 1000 0 1 0"
+
++) ./tests.sh
+-- Open new terminal:
+======
+F vs. F-slow (random_gen --log 1 100 1000 0 1 0):
+input: 108
+
+ fast: 107
+1 2 3 4 ... 32
+[truncated]
+ slow: 107
+
+Test #: good!
+Test 1: Mismatch: 147 (F-F-slow-fast-run_tests-123456.txt) vs. 148 (F-F-slow-slow-run_tests-11234.txt)
+======
+The child process exited normally with status 1: Relauch
+Click to run next next Testcase!!
+
