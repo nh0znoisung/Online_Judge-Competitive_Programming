@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 #define for0(i, n) for (int i = 0; i < (int)(n); ++i)
-#define for1(i, n) for (int i = 1; i <= (int)(n); ++i)
+#define for1(i, n) for (int i = 1; i <= (int)(n); ++i
 #define forc(i, l, r) for (int i = (int)(l); i <= (int)(r); ++i)
 #define forr0(i, n) for (int i = (int)(n) - 1; i >= 0; --i)
 #define forr1(i, n) for (int i = (int)(n); i >= 1; --i)
@@ -37,41 +37,50 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T){ cerr<
 #endif
 
 void init_code(){
-	ios_base::sync_with_stdio(false);
-	#ifndef NEAL_DEBUG
-		cin.tie(0);	
-	#endif
-	#ifndef ONLINE_JUDGE
-	   freopen("input.txt", "r", stdin);
-	   freopen("output.txt", "w", stdout);
-	#endif
+   ios_base::sync_with_stdio(false);
+   #ifndef NEAL_DEBUG
+      cin.tie(0);
+   #endif
+   #ifndef ONLINE_JUDGE
+      freopen("input.txt", "r", stdin);
+      freopen("output.txt", "w", stdout);
+   #endif
+}
+int numOfDivision(int n){
+    int ans=0;
+    for(int i=1;i*i<=n;i++){
+        if(n%i==0){
+            // cout<<i<<" "<<n/i<<endl;
+            ans++;
+            if(i*i!=n) ans++;
+        }
+    }
+    return ans;
+}
+int n, m;
+//TODO: make sure all variables get reset
+void run_case(){
+    int k = (numOfDivision(m)+1)/2 - 1;
+    if(k == 0){
+        cout<<1<<endl;
+        return;
+    }
+    int i = 0;
+    for(i=1;i*i<=n;i++){
+        if(n%i==0){
+            if(n/i <= k) break;
+        }
+    }
+    cout<<n/i<<endl;
 }
 
-
 int main() {
-    init_code();
-    // Count 0-bit
-    string s;
-    cin>>s;
-    int n = s.size(), cnt = 1;
-    vector<int>v(n);
-    for(int i = 0; i<n; i++){
-        if(s[i] == '0') v[i]++;
-    }
-    while(cin>>s){
-        for(int i = 0; i<n; i++){
-            if(s[i] == '0') v[i]++;
-        }
-        cnt++;
-    }
-    ll a = 0, b = 0;
-    for(int i = 0; i<n; i++){
-        int k = (v[i] > cnt-v[i])?0:1; //0
-        a *= 2;
-        a += k;
-        b *= 2;
-        b += 1-k;
-    }
-    cout<<a*b<<endl;   
-    return 0;
+   init_code();
+   int t;
+   cin>>t;
+   while(t--){
+       cin>>n>>m;
+      run_case();
+   }
+   return 0;
 }

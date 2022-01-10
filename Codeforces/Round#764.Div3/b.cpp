@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 #define for0(i, n) for (int i = 0; i < (int)(n); ++i)
-#define for1(i, n) for (int i = 1; i <= (int)(n); ++i)
+#define for1(i, n) for (int i = 1; i <= (int)(n); ++i
 #define forc(i, l, r) for (int i = (int)(l); i <= (int)(r); ++i)
 #define forr0(i, n) for (int i = (int)(n) - 1; i >= 0; --i)
 #define forr1(i, n) for (int i = (int)(n); i >= 1; --i)
@@ -37,41 +37,42 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T){ cerr<
 #endif
 
 void init_code(){
-	ios_base::sync_with_stdio(false);
-	#ifndef NEAL_DEBUG
-		cin.tie(0);	
-	#endif
-	#ifndef ONLINE_JUDGE
-	   freopen("input.txt", "r", stdin);
-	   freopen("output.txt", "w", stdout);
-	#endif
+   ios_base::sync_with_stdio(false);
+   #ifndef NEAL_DEBUG
+      cin.tie(0);
+   #endif
+   #ifndef ONLINE_JUDGE
+      freopen("input.txt", "r", stdin);
+      freopen("output.txt", "w", stdout);
+   #endif
 }
+int a,b,c;
+//TODO: make sure all variables get reset
+// void run_case(){
+//     //3 case;
+//     a1 = b - (c-b);
+//     b1 = (c+a)/2;
+//     c1 = b + (b-a);
 
+//     if(a%a1==0 || ((c+a)%2==0 && b%b1==0) || c%c1==0){
+//         cout << "YES" << endl;
+//     }else cout << "NO" << endl;
+// }
 
 int main() {
-    init_code();
-    // Count 0-bit
-    string s;
-    cin>>s;
-    int n = s.size(), cnt = 1;
-    vector<int>v(n);
-    for(int i = 0; i<n; i++){
-        if(s[i] == '0') v[i]++;
-    }
-    while(cin>>s){
-        for(int i = 0; i<n; i++){
-            if(s[i] == '0') v[i]++;
-        }
-        cnt++;
-    }
-    ll a = 0, b = 0;
-    for(int i = 0; i<n; i++){
-        int k = (v[i] > cnt-v[i])?0:1; //0
-        a *= 2;
-        a += k;
-        b *= 2;
-        b += 1-k;
-    }
-    cout<<a*b<<endl;   
-    return 0;
+   init_code();
+   int t;
+   cin>>t;
+   while(t--){
+       cin>>a>>b>>c;
+        int d = b - (c-b);
+        int e = (c+a)/2;
+        int f = b + (b-a);
+        // cout<<d<<" "<<e<<" "<<f<<endl;
+
+        if((d > 0 && d%a==0) || ((c+a)%2==0 && e>0 && e%b==0) || (f > 0 && f%c==0)){
+            cout << "YES" << endl;
+        }else cout << "NO" << endl;
+   }
+   return 0;
 }

@@ -47,31 +47,17 @@ void init_code(){
 	#endif
 }
 
+//TODO: make sure all variables get reset
+void run_case(){
+	
+}
 
 int main() {
     init_code();
-    // Count 0-bit
-    string s;
-    cin>>s;
-    int n = s.size(), cnt = 1;
-    vector<int>v(n);
-    for(int i = 0; i<n; i++){
-        if(s[i] == '0') v[i]++;
+    int t;
+    cin>>t;
+    while(t--){
+    	run_case();
     }
-    while(cin>>s){
-        for(int i = 0; i<n; i++){
-            if(s[i] == '0') v[i]++;
-        }
-        cnt++;
-    }
-    ll a = 0, b = 0;
-    for(int i = 0; i<n; i++){
-        int k = (v[i] > cnt-v[i])?0:1; //0
-        a *= 2;
-        a += k;
-        b *= 2;
-        b += 1-k;
-    }
-    cout<<a*b<<endl;   
     return 0;
 }

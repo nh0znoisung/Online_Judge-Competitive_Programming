@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 #define for0(i, n) for (int i = 0; i < (int)(n); ++i)
-#define for1(i, n) for (int i = 1; i <= (int)(n); ++i)
+#define for1(i, n) for (int i = 1; i <= (int)(n); ++i
 #define forc(i, l, r) for (int i = (int)(l); i <= (int)(r); ++i)
 #define forr0(i, n) for (int i = (int)(n) - 1; i >= 0; --i)
 #define forr1(i, n) for (int i = (int)(n); i >= 1; --i)
@@ -24,7 +24,7 @@ typedef vector<ll> vll;
 typedef vector<vll> vvll;
 typedef double ld;
 const int M=998244353;
-const int N=1000005,E=524288;
+// const int N=1000005,E=524288;
 
 template<typename A, typename B> ostream& operator<<(ostream &os, const pair<A, B> &p) { return os << '(' <<p.first<<", "<<p.second<<')';}
 
@@ -37,41 +37,62 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T){ cerr<
 #endif
 
 void init_code(){
-	ios_base::sync_with_stdio(false);
-	#ifndef NEAL_DEBUG
-		cin.tie(0);	
-	#endif
-	#ifndef ONLINE_JUDGE
-	   freopen("input.txt", "r", stdin);
-	   freopen("output.txt", "w", stdout);
-	#endif
+   ios_base::sync_with_stdio(false);
+   #ifndef NEAL_DEBUG
+      cin.tie(0);
+   #endif
+   #ifndef ONLINE_JUDGE
+      freopen("input.txt", "r", stdin);
+      freopen("output.txt", "w", stdout);
+   #endif
 }
-
-
-int main() {
-    init_code();
-    // Count 0-bit
+const int N = 30; //2^30 > 1e9
+vector<int> arr(N, 0);
+int n;
+vector<int> v;
+string int_to_bina(int n){
     string s;
-    cin>>s;
-    int n = s.size(), cnt = 1;
-    vector<int>v(n);
-    for(int i = 0; i<n; i++){
-        if(s[i] == '0') v[i]++;
+    for(int i = 0; i<N; i++){
+        s.insert(0, 1, (n%2)+'0');
+        n /= 2;
     }
-    while(cin>>s){
-        for(int i = 0; i<n; i++){
-            if(s[i] == '0') v[i]++;
+    return s;
+}
+//TODO: make sure all variables get reset
+void run_case(){
+    string s;
+    arr = vector<int>(N, 0);
+    for(int i = 0; i<n; i++){
+        s = int_to_bina(v[i]);
+        // cout<<s<<" ";
+        for(int j = 0; j<N; j++){
+            if(s[j] == '1') arr[j]++;
         }
-        cnt++;
     }
-    ll a = 0, b = 0;
-    for(int i = 0; i<n; i++){
-        int k = (v[i] > cnt-v[i])?0:1; //0
-        a *= 2;
-        a += k;
-        b *= 2;
-        b += 1-k;
+    // for(int i = 0; i<N; i++){
+    //     cout<<arr[i]<<" ";
+    // }
+    // cout<<endl;
+    int ans = 0;
+    for(int i = 0; i<N; i++){
+        ans *= 2;
+        if(arr[i] >= 2) ans += 1;
     }
-    cout<<a*b<<endl;   
-    return 0;
+    cout<<ans<<endl;
+}
+ 
+int main() {
+   init_code();
+   int t;
+   cin>>t;
+   while(t--){
+       cin>>n;
+       v = vector<int>(n);
+       for0(i,n){
+           cin>>v[i];
+       }
+        run_case();
+        v.clear();
+   }
+   return 0;
 }
