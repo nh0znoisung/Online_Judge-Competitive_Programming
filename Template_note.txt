@@ -1,0 +1,12 @@
+g++ Template.cpp -o a && ./a
+
+Do as the following instruction: https://apple.stackexchange.com/questions/148401/file-not-found-error-while-including-bits-stdc-h
+
+brew install gcc
+gcc --version
+cd /Library/Developer/CommandLineTools/usr/include
+sudo mkdir bits
+cd bits
+sudo cp ~/Downloads/stdc++.h stdc++.h
+
+Download stdc++.h from: https://github.com/gcc-mirror/gcc/blob/master/libstdc%2B%2B-v3/include/precompiled/stdc%2B%2B.h
